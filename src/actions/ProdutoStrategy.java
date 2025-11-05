@@ -12,3 +12,6 @@ public class ProdutoStrategy implements DecisaoStrategy {
         return new Deltas(-8_000.0, 0, 0, 0.04);
     }
 }
+//Gabi voce esta aqui?
+//Daniel voce esta aqui?
+//Luis voce nao esta aqui
