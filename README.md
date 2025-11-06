@@ -51,7 +51,7 @@ java Main
 
 ## Configurações
 O arquivo `resources/game.properties` já vem configurado com:
-- `total.rodadas=8`
+- `total.rodadas=3`
 - `max.decisoes.por.rodada=3`
 
 ---
