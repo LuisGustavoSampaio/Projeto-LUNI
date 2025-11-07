@@ -13,13 +13,24 @@ O projeto deve ser versionado em um repositório Git. O professor será incluíd
 
 ## Estrutura do Projeto
 ```
+database/
+  startupdb.mv.db
+  startupdb.trace.db
+lib/
+  h2.jar
+resources/
+  game.properties (total.rodadas=3 e max.decisoes.por.rodada=3)
+  schema.sql
 src/
   config/Config.java
+  config/game.properties
   model/Startup.java
   model/Deltas.java
   model/vo/Dinheiro.java
   model/vo/Percentual.java
   model/vo/Humor.java
+  model/old/Main.java.txt
+  modelo/old/Main.java2.txt
   actions/DecisaoStrategy.java
   actions/DecisaoFactory.java
   actions/[estratégias].java
@@ -29,9 +40,8 @@ src/
   engine/ScoreService.java
   ui/ConsoleApp.java
   Main.java
-resources/
-  game.properties (total.rodadas=8 e max.decisoes.por.rodada=3)
-  schema.sql
+  TestaConexao.java
+.gitignore
 ```
 
 ---
@@ -51,7 +61,7 @@ java Main
 
 ## Configurações
 O arquivo `resources/game.properties` já vem configurado com:
-- `total.rodadas=8`
+- `total.rodadas=3`
 - `max.decisoes.por.rodada=3`
 
 ---
