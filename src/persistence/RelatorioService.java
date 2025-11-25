@@ -36,7 +36,7 @@ public class RelatorioService {
                 );
             }
 
-            System.out.println("📄 Relatório gerado em: " + nomeArquivo);
+            System.out.println("Relatório gerado em: " + nomeArquivo);
 
         } catch (IOException e) {
             System.err.println("Erro ao gerar relatório CSV: " + e.getMessage());
