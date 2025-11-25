@@ -140,5 +140,5 @@ public class ConsoleApp {
     List<Startup> apenasEssa = Collections.singletonList(escolhida);
     RelatorioService.exportarCSV(apenasEssa);
 
-}
+    }
 }
