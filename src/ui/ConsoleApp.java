@@ -1,5 +1,6 @@
 package ui;
 
+import persistence.RelatorioService;
 import config.Config;
 import engine.GameEngine;
 import model.Startup;
@@ -93,7 +94,12 @@ public class ConsoleApp {
                 s.getMoral().valor()
             );
         }
+        
         System.out.println("==============================");
+
+        // 🔽 gera o CSV com o mesmo ranking que acabou de aparecer na tela
+        RelatorioService.exportarCSV(startups);
+        
     }
     private void continuarJogo(Scanner in) {
     dao.StartupDAO dao = new dao.StartupDAO();
@@ -129,5 +135,10 @@ public class ConsoleApp {
 
     GameEngine engine = new GameEngine();
     engine.executar(escolhida, config.totalRodadas(), config.maxDecisoesPorRodada());
+
+    // Gera CSV só com essa startup que acabou de jogar
+    List<Startup> apenasEssa = Collections.singletonList(escolhida);
+    RelatorioService.exportarCSV(apenasEssa);
+
 }
 }
