@@ -144,7 +144,7 @@ public class ConsoleApp {
     RelatorioService.exportarCSV(apenasEssa);
 
     }
-    
+
     private void executarBot() {
     if (startups.isEmpty()) {
         System.out.println("Nenhuma startup cadastrada!");
@@ -179,7 +179,8 @@ public class ConsoleApp {
         System.out.println("\n===== Rodada " + rodada + " =====");
 
         for (int i = 0; i < maxDecisoes; i++) {
-            int acao = bot.escolherAcao(s);
+            int acao = bot.escolherAcao(s, s.getRodadaAtual());
+
 
             System.out.println("BOT escolheu: " + acao);
             engine.executarAcao(s, acao);
