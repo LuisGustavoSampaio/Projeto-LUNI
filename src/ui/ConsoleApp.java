@@ -2,6 +2,7 @@ package ui;
 
 import persistence.RelatorioService;
 import config.Config;
+import engine.BotPlayer;
 import engine.GameEngine;
 import model.Startup;
 import model.vo.Dinheiro;
@@ -22,6 +23,7 @@ public class ConsoleApp {
             System.out.println("1 - Novo jogo (adicionar startup)");
             System.out.println("2 - Continuar jogo");
             System.out.println("3 - Iniciar simulação");
+            System.out.println("4 - Simular com BOT");
             System.out.println("0 - Sair");
             System.out.print("Escolha: ");
 
@@ -35,6 +37,7 @@ public class ConsoleApp {
                 case 1 -> criarStartup(in);
                 case 2 -> continuarJogo(in);
                 case 3 -> executarSimulacao();
+                case 4 -> executarBot();
                 case 0 -> System.out.println("Encerrando...");
                 default -> System.out.println("Opção inválida!");
             }
@@ -141,4 +144,52 @@ public class ConsoleApp {
     RelatorioService.exportarCSV(apenasEssa);
 
     }
+    
+    private void executarBot() {
+    if (startups.isEmpty()) {
+        System.out.println("Nenhuma startup cadastrada!");
+        return;
+    }
+
+    Scanner in = new Scanner(System.in);
+    System.out.println("Escolha uma startup para o BOT jogar:");
+
+    for (int i = 0; i < startups.size(); i++) {
+        System.out.println((i+1) + " - " + startups.get(i).getNome());
+    }
+
+    System.out.print("Número: ");
+    int idx = Integer.parseInt(in.nextLine()) - 1;
+
+    if (idx < 0 || idx >= startups.size()) {
+        System.out.println("Opção inválida!");
+        return;
+    }
+
+    Startup s = startups.get(idx);
+    BotPlayer bot = new BotPlayer();
+    GameEngine engine = new GameEngine();
+
+    System.out.println("=== BOT jogando por: " + s.getNome() + " ===");
+
+    int totalRodadas = config.totalRodadas();
+    int maxDecisoes = config.maxDecisoesPorRodada();
+
+    for (int rodada = 1; rodada <= totalRodadas; rodada++) {
+        System.out.println("\n===== Rodada " + rodada + " =====");
+
+        for (int i = 0; i < maxDecisoes; i++) {
+            int acao = bot.escolherAcao(s);
+
+            System.out.println("BOT escolheu: " + acao);
+            engine.executarAcao(s, acao);
+        }
+
+        engine.fecharRodada(s);
+    }
+
+    System.out.println("\n=== BOT terminou o jogo! ===");
+    System.out.println("Resultado final: " + s);
+}
+
 }
